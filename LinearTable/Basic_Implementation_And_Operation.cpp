@@ -46,8 +46,39 @@ bool ListInsert(SqList &L,ElemType e);
  void UnionList(SqList La,SqList Lb,SqList &Lc);//求并集
 
 
+/**
+* 删除数据
+*/
+bool Delete(SqList &L,ElemType e);
+
+
 int main(){
 
+}
+
+
+
+/**
+ * 1.已知数据值，返回位置。
+ * 2.已知位置，返回数据值。
+ */
+
+bool Delete(SqList &L,ElemType e){
+    int index = 0;
+    if(L.length == 0)
+        return false;
+    for(int i = 1;i <= L.length;i++){
+        if(L.elem[i] == e){
+            index = i;
+            break;
+        }
+    }
+    if(index == 0)
+        return false;
+    for(int i = index;i < L.length;i++)
+        L.elem[i] = L.elem[i+1];
+    L.length--;
+    return true;
 }
 
 
