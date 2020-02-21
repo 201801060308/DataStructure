@@ -51,6 +51,10 @@ int main(){
 }
 
 
+/**
+*从左到右同时进行，比较两个线性表的元素大小。小的元素插入到Lc的末尾，
+*后移index。最后将剩余部分全部接到Lc的末尾。
+ */
 void MergeList(SqList La,SqList Lb,SqList &Lc){
     int indexLa = 1,indexLb = 1,indexLc = 1;
     int lengthLa = La.length,lengthLb = Lb.length;
@@ -79,7 +83,7 @@ void MergeList(SqList La,SqList Lb,SqList &Lc){
 }
 
 
-//先找出插入位置。
+//先找出插入位置。然后按照已知插入位置进行插入操作。
 bool ListInsert(SqList &L,ElemType e){
     if(L.length >= L.listSize){
         ElemType *newBase = (ElemType *)realloc(L.elem,(L.listSize+LIST_INCREMENT)*sizeof(ElemType));
@@ -109,7 +113,7 @@ bool ListInsert(SqList &L,int index,ElemType e){
         return false;
     if(L.length>=L.listSize){
         ElemType * newBase = (ElemType *)realloc(L.elem,(L.listSize+LIST_INCREMENT)*sizeof(ElemType));
-        //判断新的内存是否分配成功
+        //判断新的内存是否分配成功。先检验内存是否分配成功，再进行赋值操作。避免直接赋值造成数据丢失。
         if(!newBase)
             exit(0);
         L.elem = newBase;
